@@ -1,0 +1,103 @@
+# ===== Backend (Python) =====
+# Virtual Environment
+BCVenv/
+
+# Python
+backend/__pycache__/
+backend/*.py[cod]
+backend/*$py.class
+backend/*.so
+backend/.Python
+backend/build/
+backend/develop-eggs/
+backend/dist/
+backend/downloads/
+backend/eggs/
+backend/.eggs/
+backend/lib/
+backend/lib64/
+backend/parts/
+backend/sdist/
+backend/var/
+backend/wheels/
+backend/*.egg-info/
+backend/.installed.cfg
+backend/*.egg
+
+# Environment variables
+backend/.env
+backend/.env.local
+
+# Auto-generated contract files
+backend/app/contract-abi.json
+backend/app/contract-address.json
+
+# ===== Smart Contracts =====
+# Hardhat
+smart-contracts/node_modules/
+smart-contracts/cache/
+smart-contracts/artifacts/
+smart-contracts/.env
+smart-contracts/coverage/
+smart-contracts/coverage.json
+smart-contracts/typechain/
+smart-contracts/typechain-types/
+
+# Hardhat VSCode
+smart-contracts/.vscode/
+
+# ===== Frontend (React) =====
+# Dependencies
+frontend/node_modules/
+
+# Production build
+frontend/dist/
+frontend/dist-ssr/
+frontend/build/
+
+# Environment
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+# Logs
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
+frontend/lerna-debug.log*
+
+# Auto-generated contract files
+frontend/src/contracts/contract-abi.json
+frontend/src/contracts/contract-address.json
+
+# Editor
+frontend/.vscode/*
+!frontend/.vscode/extensions.json
+frontend/.idea
+frontend/*.suo
+frontend/*.ntvs*
+frontend/*.njsproj
+frontend/*.sln
+frontend/*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+*.tmp
+*.temp
