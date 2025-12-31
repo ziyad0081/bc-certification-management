@@ -30,7 +30,7 @@ async function main() {
 
   // Create directories if they don't exist
   const backendDir = path.join(__dirname, "../../backend/app");
-  const frontendDir = path.join(__dirname, "../../frontend-bc/src/contracts");
+  const frontendDir = path.join(__dirname, "../../frontend/src/contracts");
 
   [backendDir, frontendDir].forEach(dir => {
     if (!fs.existsSync(dir)) {
