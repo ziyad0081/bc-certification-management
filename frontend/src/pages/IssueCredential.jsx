@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../co
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import Label from '../components/ui/Label';
+import DownloadButton from '../components/DownloadButton';
 import { Alert, AlertDescription, AlertTitle } from '../components/ui/Alert';
 import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 
@@ -12,6 +13,7 @@ const IssueCredential = () => {
   const [loading, setLoading] = useState(false);
   const [authorized, setAuthorized] = useState(null);
   const [txHash, setTxHash] = useState(null);
+  const [generatedId, setGeneratedId] = useState(null);
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     recipientName: '',
@@ -62,16 +64,17 @@ const IssueCredential = () => {
         return;
       }
 
-      const credentialId = generateCredentialId();
-      
+      const newCredentialId = generateCredentialId();
+      setGeneratedId(newCredentialId);
+
       const hash = await issueCredential({
-        credentialId,
+        credentialId: newCredentialId,
         ...formData,
       });
 
       setTxHash(hash);
-      
-      // Reset form
+
+      // Reset form (except generated ID which is needed for download)
       setFormData({
         recipientName: '',
         recipientEmail: '',
@@ -141,6 +144,11 @@ const IssueCredential = () => {
           <AlertDescription>
             Credential issued successfully. Transaction hash: {txHash}
           </AlertDescription>
+          {generatedId && (
+            <div className="mt-4">
+              <DownloadButton credentialId={generatedId} size="sm" variant="outline" className="bg-white" />
+            </div>
+          )}
         </Alert>
       )}
 

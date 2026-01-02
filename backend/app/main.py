@@ -17,6 +17,7 @@ from .models import (
 )
 from .blockchain import BlockchainService
 from .config import settings
+from .pdf_utils import create_certificate_pdf
 
 app = FastAPI(
     title="Credential Verification API",
@@ -330,6 +331,71 @@ async def check_issuer_authorization(issuer_address: str):
         }
         
     except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.get("/api/credentials/{credential_id}/pdf")
+async def download_credential_pdf(credential_id: str):
+    """Generate and download PDF for a credential"""
+    try:
+        from fastapi.responses import StreamingResponse
+        import tempfile
+        import os
+        
+        # Verify credential exists
+        verification = blockchain_service.verify_credential(credential_id)
+        if not verification["exists"] or not verification["is_valid"]:
+             raise HTTPException(status_code=404, detail="Credential not found or invalid")
+
+        # Get full details
+        credential = blockchain_service.get_credential(credential_id)
+        
+        # Generate verification URL
+        verification_url = f"{settings.frontend_url}/verify/{credential_id}"
+        
+        # Generate QR code and save to temporary file
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(verification_url)
+        qr.make(fit=True)
+        qr_img = qr.make_image(fill_color="black", back_color="white")
+        
+        # Create temporary file for QR code
+        with tempfile.NamedTemporaryFile(mode='wb', suffix='.png', delete=False) as qr_temp:
+            qr_img.save(qr_temp, format='PNG')
+            qr_temp_path = qr_temp.name
+        
+        try:
+            # Generate PDF with QR code file path
+            pdf_buffer = create_certificate_pdf({
+                "recipientName": credential["recipientName"],
+                "recipientEmail": credential["recipientEmail"],
+                "credentialType": credential["credentialType"],
+                "description": credential["description"],
+                "issuerName": credential["issuerName"],
+                "issuer": credential["issuer"],
+                "issueDate": credential["issueDate"], 
+                "credentialId": credential["credentialId"]
+            }, verification_url, qr_temp_path)
+        finally:
+            # Clean up temporary QR code file
+            if os.path.exists(qr_temp_path):
+                os.unlink(qr_temp_path)
+        
+        headers = {
+            'Content-Disposition': f'attachment; filename="credential-{credential_id}.pdf"'
+        }
+        
+        return StreamingResponse(pdf_buffer, media_type="application/pdf", headers=headers)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"Error generating PDF: {e}")
         raise HTTPException(status_code=400, detail=str(e))
 
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import QRCodeDisplay from '../components/QRCodeDisplay';
+import DownloadButton from '../components/DownloadButton';
 import { useWeb3 } from '../contexts/Web3Context';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/Card';
 import Button from '../components/ui/Button';
@@ -140,8 +141,9 @@ const VerifyCredential = () => {
             <CardHeader>
               <CardTitle>Verification QR Code</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-4">
               <QRCodeDisplay credentialId={credentialId} />
+              <DownloadButton credentialId={credentialId} className="w-full" />
             </CardContent>
           </Card>
         </>

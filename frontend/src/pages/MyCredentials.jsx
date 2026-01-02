@@ -8,6 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from '../components/ui/Alert';
 import { CheckCircle2, XCircle, Loader2 } from 'lucide-react';
 import { formatDate } from '../lib/utils';
 import QRCodeDisplay from '../components/QRCodeDisplay';
+import DownloadButton from '../components/DownloadButton';
 
 const MyCredentials = () => {
   const { getRecipientCredentials, getCredential } = useWeb3();
@@ -160,8 +161,9 @@ const MyCredentials = () => {
                   </Button>
 
                   {showQr === credential.credentialId && (
-                    <div className="mt-4 border rounded-lg p-4 bg-gray-50">
+                    <div className="mt-4 border rounded-lg p-4 bg-gray-50 space-y-4">
                       <QRCodeDisplay credentialId={credential.credentialId} />
+                      <DownloadButton credentialId={credential.credentialId} className="w-full" />
                     </div>
                   )}
                 </div>
