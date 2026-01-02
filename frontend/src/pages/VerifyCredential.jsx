@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import QRCodeDisplay from '../components/QRCodeDisplay';
 import { useWeb3 } from '../contexts/Web3Context';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/Card';
 import Button from '../components/ui/Button';
@@ -126,13 +127,24 @@ const VerifyCredential = () => {
       )}
 
       {result && result.exists && result.isValid && (
-        <Alert variant="success">
-          <CheckCircle2 className="h-4 w-4" />
-          <AlertTitle>Verified Credential</AlertTitle>
-          <AlertDescription>
-            This credential is valid and authentic
-          </AlertDescription>
-        </Alert>
+        <>
+          <Alert variant="success">
+            <CheckCircle2 className="h-4 w-4" />
+            <AlertTitle>Verified Credential</AlertTitle>
+            <AlertDescription>
+              This credential is valid and authentic
+            </AlertDescription>
+          </Alert>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Verification QR Code</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <QRCodeDisplay credentialId={credentialId} />
+            </CardContent>
+          </Card>
+        </>
       )}
 
       {fullDetails && (

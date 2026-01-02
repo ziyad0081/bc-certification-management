@@ -7,6 +7,7 @@ import Label from '../components/ui/Label';
 import { Alert, AlertDescription, AlertTitle } from '../components/ui/Alert';
 import { CheckCircle2, XCircle, Loader2 } from 'lucide-react';
 import { formatDate } from '../lib/utils';
+import QRCodeDisplay from '../components/QRCodeDisplay';
 
 const MyCredentials = () => {
   const { getRecipientCredentials, getCredential } = useWeb3();
@@ -14,10 +15,11 @@ const MyCredentials = () => {
   const [loading, setLoading] = useState(false);
   const [credentials, setCredentials] = useState([]);
   const [error, setError] = useState(null);
+  const [showQr, setShowQr] = useState(null);
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    
+
     if (!email.trim()) {
       setError('Please enter an email address');
       return;
@@ -29,7 +31,7 @@ const MyCredentials = () => {
 
     try {
       const credentialIds = await getRecipientCredentials(email);
-      
+
       if (credentialIds.length === 0) {
         setError('No credentials found for this email');
         setLoading(false);
@@ -109,7 +111,7 @@ const MyCredentials = () => {
           <h2 className="text-xl font-semibold">
             Found {credentials.length} credential{credentials.length !== 1 ? 's' : ''}
           </h2>
-          
+
           {credentials.map((credential) => (
             <Card key={credential.credentialId}>
               <CardHeader>
@@ -145,6 +147,23 @@ const MyCredentials = () => {
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">Credential ID</p>
                   <p className="text-sm font-mono break-all text-xs">{credential.credentialId}</p>
+                </div>
+
+                <div className="pt-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full"
+                    onClick={() => setShowQr(showQr === credential.credentialId ? null : credential.credentialId)}
+                  >
+                    {showQr === credential.credentialId ? 'Hide QR Code' : 'Show QR Code'}
+                  </Button>
+
+                  {showQr === credential.credentialId && (
+                    <div className="mt-4 border rounded-lg p-4 bg-gray-50">
+                      <QRCodeDisplay credentialId={credential.credentialId} />
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
