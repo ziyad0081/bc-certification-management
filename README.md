@@ -7,7 +7,7 @@ A full-stack decentralized application (DApp) for issuing, verifying, and managi
 ![Python](https://img.shields.io/badge/Python-3.9+-3776AB.svg)
 ![React](https://img.shields.io/badge/React-18.2.0-61DAFB.svg)
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
@@ -21,16 +21,16 @@ A full-stack decentralized application (DApp) for issuing, verifying, and managi
 - [Contributing](#contributing)
 - [License](#license)
 
-## ✨ Features
+## Features
 
 ### Core Features
-- **🎓 Issue Credentials**: Authorized institutions can issue blockchain-verified credentials
-- **✅ Verify Credentials**: Instantly verify credential authenticity
-- **📱 QR Code Support**: Generate QR codes for easy verification
-- **🔒 Immutable Records**: All credentials permanently stored on blockchain
-- **❌ Revocation**: Issuers can revoke credentials if needed
-- **🔐 Authorization System**: Only authorized addresses can issue credentials
-- **📑 PDF & QR Code Features**: The system uses WeasyPrint for modern, high-fidelity certificate generation with custom TTF/OTF fonts, Flexbox Layout, and QR Verification.
+- **Issue Credentials**: Authorized institutions can issue blockchain-verified credentials
+- **Verify Credentials**: Instantly verify credential authenticity
+- **QR Code Support**: Generate QR codes for easy verification
+- **Immutable Records**: All credentials permanently stored on blockchain
+- **Revocation**: Issuers can revoke credentials if needed
+- **Authorization System**: Only authorized addresses can issue credentials
+- **PDF & QR Code Features**: The system uses WeasyPrint for modern, high-fidelity certificate generation with custom TTF/OTF fonts, Flexbox Layout, and QR Verification.
 
 ### Use Cases
 - Course completion certificates
@@ -39,7 +39,7 @@ A full-stack decentralized application (DApp) for issuing, verifying, and managi
 - Internship completions
 - Academic achievements
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Smart Contract
 - **Solidity** (v0.8.19) - Smart contract development
@@ -59,7 +59,7 @@ A full-stack decentralized application (DApp) for issuing, verifying, and managi
 - **React Router** - Navigation
 - **Vite** - Build tool
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 credential-verification/
@@ -119,7 +119,7 @@ credential-verification/
 └── README.md
 ```
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before you begin, ensure you have the following installed:
 
@@ -134,7 +134,7 @@ Before you begin, ensure you have the following installed:
   * **macOS**: `brew install pango libffi`
   * **Linux**: `sudo apt install libpango-1.0-0 libpangoft2-1.0-0 shared-mime-info`
 
-## 📥 Installation
+## Installation
 
 ### 1. Clone the Repository
 
@@ -187,7 +187,7 @@ cd ../frontend
 npm install
 ```
 
-## 🚀 Running the Application
+## Running the Application
 
 You need **three terminal windows** to run all components:
 
@@ -231,7 +231,7 @@ npm run dev
 
 **Frontend will be available at:** http://localhost:5173
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### 1. Setup MetaMask
 
@@ -286,7 +286,7 @@ npm run dev
 2. View all credentials you've issued
 3. Revoke credentials if needed
 
-## ⚠️ Important Notes
+## Important Notes
 
 ### Authorization
 - **Only the deployer account** is authorized by default
@@ -313,7 +313,7 @@ npm run dev
 - These files are copied to both backend and frontend
 - Don't manually edit these files
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### "Smart contract not initialized"
 **Problem:** Backend can't find contract files
@@ -405,14 +405,14 @@ taskkill /PID <PID> /F
 - Ensure you have test ETH
 - Verify account authorization
 
-## 📚 API Documentation
+## API Documentation
 
 Once the backend is running, visit:
 - **Interactive API Docs:** http://localhost:8000/docs
 - **Alternative Docs:** http://localhost:8000/redoc
 - **Health Check:** http://localhost:8000/health
 
-## 🧪 Testing
+## Testing
 
 ### Test API with curl
 
@@ -427,7 +427,7 @@ curl http://localhost:8000/api/credentials/verify/YOUR_CREDENTIAL_ID
 curl http://localhost:8000/api/recipients/john@example.com/credentials
 ```
 
-## 🌐 Deployment to Testnet
+## Deployment to Testnet
 
 ### 1. Get Test ETH
 
@@ -465,7 +465,7 @@ cd frontend
 npm run build
 ```
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -475,18 +475,18 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - OpenZeppelin for secure smart contract libraries
 - Hardhat for excellent development tools
 - FastAPI for the modern Python framework
 - React and Vite for frontend tooling
 
-## 💬 Support
+## Support
 
 If you have any questions or run into issues:
 
@@ -495,8 +495,7 @@ If you have any questions or run into issues:
 3. Open an issue on GitHub
 
 ---
-
-**⚡ Quick Start Commands:**
+**Quick Start Commands:**
 
 ```bash
 # Terminal 1 - Blockchain
@@ -510,7 +509,7 @@ cd ../backend && source venv/bin/activate && uvicorn app.main:app --reload
 cd frontend && npm run dev
 ```
 
-**🔗 Access Points:**
+**Access Points:**
 - Frontend: http://localhost:5173
 - Backend API: http://localhost:8000
 - API Docs: http://localhost:8000/docs
